@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+   <!-- 描述外部的，可替代的属性-->
+    <!--<properties resource="databaseMysql.properties" /> &lt;!&ndash; 引入属性文件 &ndash;&gt;-->
+
+    <settings> <!-- 修改mybatis运行时的一些行为-->
+        <setting name="logImpl" value="STDOUT_LOGGING" /><!--  mybatis自带的,实现mybatis打印sql日志 -->
+        <!--<setting name="logImpl" value="LOG4J" /> &lt;!&ndash; 就可以通过Log4j将SQL语句打印出来 &ndash;&gt;-->
+    </settings>
+
+    <typeAliases> <!-- 别名的使用 -->
+        <package name="com.entity" />  <!-- 整个包下面的类设置别名，别名就是对应的类名 -->
+        <!--<typeAlias type="com.ssm.entity.Bill" alias="Bill"/>-->  <!-- 单个设置别名-->
+    </typeAliases>
+
+
+
+    <!-- 注册映射文件 begin -->
+    <!--mappers标签引入映射器的四种方式，可以了解-->
+    <mappers>
+        <mapper resource="com/dao/mapper/AirIndexMapper.xml" />
+        <mapper resource="com/dao/mapper/DistrictMapper.xml" />
+    </mappers>
+    <!-- 注册映射文件 end -->
+
+</configuration>

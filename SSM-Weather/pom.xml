@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>war</packaging>
+
+  <name>SSM-Weather</name>
+  <groupId>com.test</groupId>
+  <artifactId>SSM-Weather</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <!--idea的默认是不加载java文件下的所以我们要手动添加-->
+  <!-- 我们在文件夹内添加的xml及properties文件默认编译不会被复制过去，所以运行时会提示找不到文件，在配置中指明要一起打包文件即可-->
+  <build> <!-- 让编译器把src/main/java目录下的xml文件一同编译到classes文件夹下-->
+    <resources> <!-- 打包文件内容配置 -->
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+
+  <!-- 有利于统一修改版本号 -->
+  <properties>
+    <!-- 属性名是自己定义的 -->
+    <springmvc-version>4.1.6.RELEASE</springmvc-version>
+    <spring-framework-version>4.1.6.RELEASE</spring-framework-version>
+    <mybatis-version>3.2.1</mybatis-version>
+  </properties>
+
+  <dependencies>
+
+    <dependency><!-- 继承HttpSerlet 为编写代码不报错-->
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency> <!-- jstl库的导入 -->
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>  <!--  spring-mvc 库导入-->
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${springmvc-version}</version>
+    </dependency>
+
+    <dependency> <!-- spring 依赖 spring-tx 事物 -->
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${spring-framework-version}</version>
+    </dependency>
+
+    <dependency> <!-- spring-tx 依赖 spring-jdbc -->
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring-framework-version}</version>
+    </dependency>
+
+      <dependency> <!-- mybatis 与 spring 整合包-->
+          <groupId>org.mybatis</groupId>
+          <artifactId>mybatis-spring</artifactId>
+          <version>1.3.2</version>
+      </dependency>
+
+    <dependency> <!-- 阿里数据源-->
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.15</version>
+    </dependency>
+
+    <dependency>    <!-- mybatis 包 -->
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis-version}</version>
+    </dependency>
+
+    <dependency>  <!-- 数据库驱动的导入 -->
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.47</version>
+    </dependency>
+
+  </dependencies>
+
+
+</project>

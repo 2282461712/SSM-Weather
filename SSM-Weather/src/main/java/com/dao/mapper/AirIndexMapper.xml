@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.AirIndexDao">
+
+    <resultMap id="AirIndexMapper" type="com.entity.District">
+        <result property="name" column="name"/>
+        <collection property="airIndexList" ofType="com.entity.AirIndex">
+            <id property="id" column="id"/>
+            <result property="monitorTime" column="monitorTime"/>
+            <result property="pm10" column="pm10"/>
+            <result property="pm25" column="pm25"/>
+            <result property="monitorStation" column="monitorStation"/>
+        </collection>
+    </resultMap>
+    <select id="selectAirIndexs" resultMap="AirIndexMapper">
+         SELECT a.id,d.`name`,a.monitorTime,a.`pm10`,a.`pm25`,a.`monitorStation`
+          FROM wetther_air_index a inner JOIN wetther_district d ON a.`districtid`=d.`id`
+          <where>
+              <if test=" district!=-1 ">
+                  districtid=${district}
+              </if>
+          </where>
+          order by a.monitorTime asc
+          limit ${currentPage},${pageSize}
+    </select>
+
+    <select id="selectTotalRows" resultType="int">
+         SELECT count(1)
+          FROM wetther_air_index a inner JOIN wetther_district d ON a.`districtid`=d.`id`
+    </select>
+
+    <insert id="insertAirIndex" parameterType="com.entity.AirIndex">
+        INSERT INTO wetther_air_index
+        VALUES(DEFAULT,#{districtId},#{monitorTime},#{pm10},#{pm25},#{monitorStation},NOW())
+    </insert>
+
+    <select id="selectAirIndexById" resultType="com.entity.AirIndex">
+        SELECT id,districtid,monitorTime,pm10,pm25,monitorStation,lastModifyTime
+        FROM wetther_air_index
+        WHERE id=#{id}
+    </select>
+
+    <update id="updateAirIndexById" parameterType="com.entity.AirIndex">
+        UPDATE wetther_air_index
+        SET
+        districtId=#{districtId},
+        monitorTime=#{monitorTime},
+        pm10=#{pm10},
+        pm25=#{pm25},
+        monitorStation=#{monitorStation}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteAirIndexById">
+        delete from wetther_air_index where id=#{id}
+    </delete>
+
+</mapper>
