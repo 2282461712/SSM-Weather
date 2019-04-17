@@ -3,3 +3,4 @@ test fil2;
 
 test file3;
 test dir;
+好啊哈
