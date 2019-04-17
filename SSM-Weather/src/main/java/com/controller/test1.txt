@@ -1,7 +1,0 @@
-test file ;
-test fil2;
-
-test file3;
-tett fecht;
-tett fecht2;
-tett fecht3;
